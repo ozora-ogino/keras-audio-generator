@@ -1,63 +1,36 @@
 import numpy as np
 import pytest
-from PIL import Image
+import soundfile as sf
+import librosa
 
-from keras_preprocessing.image import image_data_generator, utils
+from audio import audio_data_generator, utils
 
 
 @pytest.fixture(scope='module')
-def all_test_images():
-    img_w = img_h = 20
-    rgb_images = []
-    rgba_images = []
-    gray_images = []
+def all_test_audio():
+    length = 30000
+    audio = []
     for n in range(8):
-        bias = np.random.rand(img_w, img_h, 1) * 64
-        variance = np.random.rand(img_w, img_h, 1) * (255 - 64)
-        imarray = np.random.rand(img_w, img_h, 3) * variance + bias
-        im = Image.fromarray(imarray.astype('uint8')).convert('RGB')
-        rgb_images.append(im)
-
-        imarray = np.random.rand(img_w, img_h, 4) * variance + bias
-        im = Image.fromarray(imarray.astype('uint8')).convert('RGBA')
-        rgba_images.append(im)
-
-        imarray = np.random.rand(img_w, img_h, 1) * variance + bias
-        im = Image.fromarray(
-            imarray.astype('uint8').squeeze()).convert('L')
-        gray_images.append(im)
-
-    return [rgb_images, rgba_images, gray_images]
+        bias = np.random.rand(length) * 64
+        variance = np.random.rand(length) * (255 - 64)
+        imarray = np.random.rand(length) * variance + bias
+        audio.append(imarray)
+    return [audio]
 
 
-def test_image_data_generator(all_test_images):
-    for test_images in all_test_images:
+def test_audio_data_generator(all_test_audio):
+    for test_audio in all_test_audio:
         img_list = []
-        for im in test_images:
-            img_list.append(utils.img_to_array(im)[None, ...])
+        for im in test_audio:
+            audio_list.append(utils.audio_to_array(im)[None, ...])
 
-        image_data_generator.ImageDataGenerator(
-            featurewise_center=True,
-            samplewise_center=True,
-            featurewise_std_normalization=True,
-            samplewise_std_normalization=True,
-            zca_whitening=True,
-            rotation_range=90.,
-            width_shift_range=0.1,
-            height_shift_range=0.1,
-            shear_range=0.5,
-            zoom_range=0.2,
-            channel_shift_range=0.,
-            brightness_range=(1, 5),
+        audio_data_generator.AudioDataGenerator(
             fill_mode='nearest',
-            cval=0.5,
-            horizontal_flip=True,
-            vertical_flip=True,
             interpolation_order=1
         )
 
 
-def test_image_data_generator_with_validation_split(all_test_images):
+def test_audio_data_generator_with_validation_split(all_test_images):
     for test_images in all_test_images:
         img_list = []
         for im in test_images:
