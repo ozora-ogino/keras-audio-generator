@@ -1,12 +1,15 @@
 # Audio Data Generator on keras
+
 ## Description
-This is 
+Keras data generator for audio data.
 
-###  How to use
+### Installation 
 
-```git clone https://github.com/ozora-ogino/keras-audio-generator```
-
-
+```
+$ git clone https://github.com/ozora-ogino/keras-audio-generator
+$ cd keras-audio-generator/
+$ sudo pip3 install -r requirements.txt
+```
 
 
 
