@@ -86,7 +86,6 @@ class DirectoryIterator(BatchFromFilesMixin, Iterator):
                  save_format='wav',
                  follow_links=False,
                  subset=None,
-                 interpolation='nearest',
                  dtype='float32'):
         super(DirectoryIterator, self).set_processing_attrs(audio_data_generator,
                                                             target_size,
@@ -95,7 +94,6 @@ class DirectoryIterator(BatchFromFilesMixin, Iterator):
                                                             save_prefix,
                                                             save_format,
                                                             subset,
-                                                            interpolation,
                                                             sr
                                                             )
         self.directory = directory

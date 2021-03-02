@@ -52,8 +52,7 @@ def save_audio(path,
     sf.write(path, y, sr, format=file_format)
 
 
-def load_audio(path, sr=16000, target_size=30000,
-             interpolation='nearest'):
+def load_audio(path, sr=16000, target_size=30000):
     """Loads an image into PIL format.
 
     # Arguments
@@ -87,16 +86,6 @@ def load_audio(path, sr=16000, target_size=30000,
         raise ImportError('Could not import librosa.')
 
     audio, sr = librosa.load(path, sr=sr)
-    #if isinstance(path, io.BytesIO):
-    #    audio, sr = librosa.load(path, sr=sr)
-    #elif isinstance(path, (Path, bytes, str)):
-    #    if isinstance(path, Path):
-    #        path = str(path.resolve())
-    #    with open(path, 'rb') as f:
-    #        audio = librosa.load(io.BytesIO(f.read()))
-    #else:
-    #    raise TypeError('path should be path-like or io.BytesIO'
-    #                   ', not {}'.format(type(path)))
     if target_size is not None:
         if len(audio) != target_size:
             length = len(audio)

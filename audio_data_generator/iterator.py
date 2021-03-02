@@ -131,7 +131,6 @@ class BatchFromFilesMixin():
                              save_prefix,
                              save_format,
                              subset,
-                             interpolation,
                              sr
                              ):
         """Sets attributes to use later for processing files into a batch.
@@ -166,7 +165,6 @@ class BatchFromFilesMixin():
         self.save_to_dir = save_to_dir
         self.save_prefix = save_prefix
         self.save_format = save_format
-        self.interpolation = interpolation
         if subset is not None:
             validation_split = self.audio_data_generator._validation_split
             if subset == 'validation':
@@ -197,13 +195,9 @@ class BatchFromFilesMixin():
         filepaths = self.filepaths
         for i, j in enumerate(index_array):
             audio = load_audio(filepaths[j],
-                           target_size=self.target_size,
-                           interpolation=self.interpolation)
+                               sr=self.sr,
+                               target_size=self.target_size)
             x = audio_to_array(audio)
-            # Pillow images should be closed after `load_img`,
-            # but not PIL images.
-            if hasattr(audio, 'close'):
-                audio.close()
             if self.audio_data_generator:
                 params = self.audio_data_generator.get_random_transform(x.shape)
                 x = self.audio_data_generator.apply_transform(x, params)

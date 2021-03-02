@@ -239,14 +239,12 @@ class AudioDataGenerator(object):
                  rescale=None,
                  preprocessing_function=None,
                  validation_split=0.0,
-                 interpolation_order=1,
                  dtype='float32'):
 
         self.fill_mode = fill_mode
         self.rescale = rescale
         self.preprocessing_function = preprocessing_function
         self.dtype = dtype
-        self.interpolation_order = interpolation_order
 
         if validation_split and not 0 < validation_split < 1:
             raise ValueError(
@@ -346,7 +344,6 @@ class AudioDataGenerator(object):
                             save_format='wav',
                             follow_links=False,
                             subset=None,
-                            interpolation='nearest',
                             ):
         """Takes the path to a directory & generates batches of augmented data.
 
@@ -441,7 +438,6 @@ class AudioDataGenerator(object):
             save_format=save_format,
             follow_links=follow_links,
             subset=subset,
-            interpolation=interpolation,
             dtype=self.dtype
         )
 
