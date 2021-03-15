@@ -235,13 +235,11 @@ class AudioDataGenerator(object):
     """
 
     def __init__(self,
-                 fill_mode='nearest',
                  rescale=None,
                  preprocessing_function=None,
                  validation_split=0.0,
                  dtype='float32'):
 
-        self.fill_mode = fill_mode
         self.rescale = rescale
         self.preprocessing_function = preprocessing_function
         self.dtype = dtype

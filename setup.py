@@ -1,46 +1,32 @@
 from setuptools import find_packages, setup
 
 long_description = '''
-Keras Preprocessing is the data preprocessing
+Keras audio data generator is the data preprocessing
 and data augmentation module of the Keras deep learning library.
-It provides utilities for working with image data, text data,
-and sequence data.
+It provides utilities for working with audio data
+which keras official library doesn't provide.
 
-Read the documentation at: https://keras.io/
-
-Keras Preprocessing may be imported directly
-from an up-to-date installation of Keras:
-
-```
-from keras import preprocessing
-```
-
-Keras Preprocessing is compatible with Python 3.6
-and is distributed under the MIT license.
+Keras audio data generator is distributed under the MIT license.
 '''
 
-setup(name='Keras_Preprocessing',
-      version='1.1.2',
-      description='Easy data preprocessing and data augmentation '
+setup(name='keras_audio_generator',
+      version='1.0.0',
+      description='Keras audio data generator'
                   'for deep learning models',
       long_description=long_description,
-      author='Keras Team',
-      url='https://github.com/keras-team/keras-preprocessing',
-      download_url='https://github.com/keras-team/'
-                   'keras-preprocessing/tarball/1.1.2',
+      author='Ozora Ogino',
+      url='https://github.com/ozora-ogino/keras-audio-generator',
+      download_url='https://github.com/ozora-ogino/'
+                   'keras-audio-generator/tarball/1.1.2',
       license='MIT',
-      install_requires=['numpy>=1.9.1'],
+      install_requires=['numpy>=1.9.1',
+                        'keras',
+                        'soundfile',
+                        'librosa',
+                        ],
       extras_require={
-          'tests': ['pandas',
-                    'Pillow',
-                    'tensorflow',  # CPU version
-                    'keras',
-                    'pytest',
-                    'pytest-xdist',
-                    'pytest-cov'],
+          'tests': [ 'tensorflow'],
           'pep8': ['flake8'],
-          'image': ['scipy>=0.14',
-                    'Pillow>=5.2.0'],
       },
       classifiers=[
           'Development Status :: 5 - Production/Stable',

@@ -189,7 +189,20 @@ class BatchFromFilesMixin():
         # Returns
             A batch of transformed samples.
         """
-        batch_x = np.zeros((len(index_array),) + (self.target_size,), dtype=self.dtype)
+        if self.dim == 1:
+            batch_x = np.zeros((len(index_array),) + (self.target_size,), dtype=self.dtype)
+        elif self.dim == 2:
+            batch_x = np.zeros((len(index_array),) + (self.target_size,), dtype=self.dtype)
+            batch_x = batch_x[:,:,np.newaxis]
+        elif self.dim == 3:
+            audio = load_audio(self.filepaths[0],
+                               sr=self.sr,
+                               target_size=self.target_size)
+            shape = self.audio_data_generator.standardize(audio).shape
+            batch_x = np.zeros((len(index_array),) + shape, dtype=self.dtype)
+            del audio
+        else:
+            raise Exception('Please set dim 1, 2 or 3.')
         # build batch of image data
         # self.filepaths is dynamic, is better to call it once outside the loop
         filepaths = self.filepaths
@@ -202,10 +215,13 @@ class BatchFromFilesMixin():
                 params = self.audio_data_generator.get_random_transform(x.shape)
                 x = self.audio_data_generator.apply_transform(x, params)
                 x = self.audio_data_generator.standardize(x)
+
+            if self.dim == 2 and x.ndim != 2:
+                x = x[:, np.newaxis]
+
             batch_x[i] = x
 
-        if self.dim == 2:
-            batch_x = batch_x[:,:,np.newaxis]
+        # if self.dim == 2: batch_x = batch_x[:,:,np.newaxis]
 
         # optionally save augmented images to disk for debugging purposes
         if self.save_to_dir:
