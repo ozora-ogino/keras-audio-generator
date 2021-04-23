@@ -10,7 +10,7 @@ So you can use this easily once you install.
 
 AudioDataGenerator uses raw audio as inputs and outputs 1D, 2D or 3D data for inputs of Neural Network.
 
-If you want AudioDataGenerator to output 3d data such as spctrogram, all you need to do is pass the function which extracts audio features to  ```preprocessing_function```.
+If you want AudioDataGenerator to output 3d data such as spctrogram, all you need to do is pass the function which extracts audio features to  ```preprocessing_function``` parameter.
 
 
 ### Installation 
