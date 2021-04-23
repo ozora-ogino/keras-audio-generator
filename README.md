@@ -10,7 +10,7 @@ So you can use this easily once you install.
 
 AudioDataGenerator assume 1D , 2D, 3D inputs of Neural Networks.
 
-1D for Dense, 2D for Conv1D, 3D for Conv2D.
+1D for Dense, 2D for Conv1D, 3D for Conv2D layer.
 
 
 ### Installation 
