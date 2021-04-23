@@ -8,9 +8,9 @@ So you can use this easily once you install.
 
 ## Description
 
-AudioDataGenerator assume 1D , 2D, 3D inputs of Neural Networks.
+AudioDataGenerator uses raw audio as inputs and outputs 1D, 2D or 3D data for inputs of Neural Network.
 
-1D for Dense, 2D for Conv1D, 3D for Conv2D layer.
+If you want AudioDataGenerator to output 3d data such as spctrogram, all you need to do is pass the function which extracts audio features to  ```preprocessing_function```.
 
 
 ### Installation 
